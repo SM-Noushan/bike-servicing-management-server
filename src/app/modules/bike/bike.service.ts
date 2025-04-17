@@ -18,6 +18,20 @@ const createBike = async (payload: Omit<Bike, 'bikeId'>) => {
   return result;
 };
 
+const getBikes = async () => {
+  const result = await prisma.bike.findMany();
+
+  return result;
+};
+
+const getBike = async (bikeId: string) => {
+  const result = await prisma.bike.findUnique({ where: { bikeId } });
+
+  return result;
+};
+
 export const BikeService = {
   createBike,
+  getBikes,
+  getBike,
 };

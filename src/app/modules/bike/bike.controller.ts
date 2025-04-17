@@ -14,6 +14,33 @@ const createBike = catchAsync(async (req, res) => {
   });
 });
 
+const getBikes = catchAsync(async (req, res) => {
+  const result = await BikeService.getBikes();
+
+  sendResponse(res, {
+    statusCode: status.OK,
+    success: true,
+    message: result.length > 0 ? 'Bikes fetched successfully' : 'No bike found',
+    data: result,
+  });
+});
+
+const getBike = catchAsync(async (req, res) => {
+  const result = await BikeService.getBike(req.params.id);
+
+  sendResponse(res, {
+    statusCode: status.OK,
+    success: true,
+    message:
+      result == null
+        ? 'No bike found with this id'
+        : 'Bike fetched successfully',
+    data: result,
+  });
+});
+
 export const BikeController = {
   createBike,
+  getBikes,
+  getBike,
 };
