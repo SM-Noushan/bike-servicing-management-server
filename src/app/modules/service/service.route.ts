@@ -13,6 +13,7 @@ router
     ServiceController.createService,
   )
   .get('/', ServiceController.getServices)
-  .get('/:id', validateRequestParam(), ServiceController.getService);
+  .get('/:id', validateRequestParam(), ServiceController.getService)
+  .put('/:id', validateRequestParam(), ServiceController.updateService);
 
 export const ServiceRoutes = router;

@@ -42,8 +42,20 @@ const getService = catchAsync(async (req, res) => {
   });
 });
 
+const updateService = catchAsync(async (req, res) => {
+  const result = await ServiceService.updateService(req.params.id, req.body);
+
+  sendResponse(res, {
+    statusCode: status.OK,
+    success: true,
+    message: 'Service marked as completed',
+    data: result,
+  });
+});
+
 export const ServiceController = {
   createService,
   getServices,
   getService,
+  updateService,
 };
