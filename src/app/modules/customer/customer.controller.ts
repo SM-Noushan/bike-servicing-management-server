@@ -28,4 +28,18 @@ const getCustomers = catchAsync(async (req, res) => {
   });
 });
 
-export const CustomerController = { createCustomer, getCustomers };
+const getCustomer = catchAsync(async (req, res) => {
+  const result = await CustomerService.getCustomer(req.params.id);
+
+  sendResponse(res, {
+    statusCode: status.OK,
+    success: true,
+    message:
+      result == null
+        ? 'No customer found with this id'
+        : 'Customer fetched successfully',
+    data: result,
+  });
+});
+
+export const CustomerController = { createCustomer, getCustomers, getCustomer };

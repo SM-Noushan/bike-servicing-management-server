@@ -2,6 +2,7 @@ import express from 'express';
 import { CustomerController } from './customer.controller';
 import { CustomerValidation } from './customer.validation';
 import validateRequest from '../middlewares/validateRequest';
+import validateRequestParam from '../middlewares/validateRequestParam';
 
 const router = express.Router();
 
@@ -11,6 +12,7 @@ router
     validateRequest(CustomerValidation.createCustomerValidationSchema),
     CustomerController.createCustomer,
   )
-  .get('/', CustomerController.getCustomers);
+  .get('/', CustomerController.getCustomers)
+  .get('/:id', validateRequestParam(), CustomerController.getCustomer);
 
 export const CustomerRoutes = router;
