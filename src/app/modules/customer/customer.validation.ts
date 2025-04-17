@@ -11,6 +11,15 @@ const createCustomerValidationSchema = z.object({
   }),
 });
 
+const updateCustomerValidationSchema = z.object({
+  body: createCustomerValidationSchema.shape.body
+    .partial()
+    .refine((data) => Object.keys(data).length > 0, {
+      message: 'At least one valid field must be provided for update.',
+    }),
+});
+
 export const CustomerValidation = {
   createCustomerValidationSchema,
+  updateCustomerValidationSchema,
 };

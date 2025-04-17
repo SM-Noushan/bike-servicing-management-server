@@ -13,6 +13,12 @@ router
     CustomerController.createCustomer,
   )
   .get('/', CustomerController.getCustomers)
-  .get('/:id', validateRequestParam(), CustomerController.getCustomer);
+  .get('/:id', validateRequestParam(), CustomerController.getCustomer)
+  .put(
+    '/:id',
+    validateRequestParam(),
+    validateRequest(CustomerValidation.updateCustomerValidationSchema),
+    CustomerController.updateCustomer,
+  );
 
 export const CustomerRoutes = router;

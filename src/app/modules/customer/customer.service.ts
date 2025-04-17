@@ -25,4 +25,20 @@ const getCustomer = async (customerId: string) => {
   return result;
 };
 
-export const CustomerService = { createCustomer, getCustomers, getCustomer };
+const updateCustomer = async (
+  customerId: string,
+  payload: Partial<Customer>,
+) => {
+  const result = await prisma.customer.update({
+    where: { customerId },
+    data: payload,
+  });
+  return result;
+};
+
+export const CustomerService = {
+  createCustomer,
+  getCustomers,
+  getCustomer,
+  updateCustomer,
+};

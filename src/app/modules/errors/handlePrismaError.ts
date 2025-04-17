@@ -4,16 +4,18 @@ import { PrismaClientKnownRequestError } from '../../../generated/prisma/runtime
 const prismaClientKnownRequestError = (
   err: PrismaClientKnownRequestError,
 ): TGenericErrorResponse => {
+  // console.log(err);
   let statusCode: number;
   const errorSources: TErrorSource = [
     {
       path: err.meta?.modelName as string,
-      message: err.message,
+      message: err?.meta?.cause ? (err?.meta?.cause as string) : err.message,
     },
   ];
   switch (err.code) {
     case 'P2002':
       statusCode = 409;
+      errorSources[0].message = `Unique constraint failed on the ${err.meta?.target} field`;
       break;
     case 'P2001':
     case 'P2025':

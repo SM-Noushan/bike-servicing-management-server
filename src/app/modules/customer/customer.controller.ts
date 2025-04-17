@@ -42,4 +42,20 @@ const getCustomer = catchAsync(async (req, res) => {
   });
 });
 
-export const CustomerController = { createCustomer, getCustomers, getCustomer };
+const updateCustomer = catchAsync(async (req, res) => {
+  const result = await CustomerService.updateCustomer(req.params.id, req.body);
+
+  sendResponse(res, {
+    statusCode: status.OK,
+    success: true,
+    message: 'Customer updated successfully',
+    data: result,
+  });
+});
+
+export const CustomerController = {
+  createCustomer,
+  getCustomers,
+  getCustomer,
+  updateCustomer,
+};
