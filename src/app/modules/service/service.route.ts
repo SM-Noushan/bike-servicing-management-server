@@ -13,6 +13,7 @@ router
     ServiceController.createService,
   )
   .get('/', ServiceController.getServices)
+  .get('/status', ServiceController.getServiceStatus)
   .get('/:id', validateRequestParam(), ServiceController.getService)
   .put('/:id', validateRequestParam(), ServiceController.updateService);
 
