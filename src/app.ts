@@ -1,4 +1,5 @@
 import cors from 'cors';
+import router from './app/routes';
 import notFound from './app/modules/middlewares/notFound';
 import express, { Application, Request, Response } from 'express';
 import globalErrorHandler from './app/modules/middlewares/globalErrorHandler';
@@ -11,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // application routes
-app.use('/api');
+app.use('/api', router);
 
 app.get('/', async (req: Request, res: Response) => {
   res.send('Server is running successfully');

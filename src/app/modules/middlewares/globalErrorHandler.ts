@@ -3,6 +3,8 @@ import { ZodError } from 'zod';
 import { ErrorRequestHandler } from 'express';
 import { TErrorSource } from '../interface/error';
 import handleZodError from '../errors/handleZodError';
+import { PrismaError } from '../errors/handlePrismaError';
+import { PrismaClientKnownRequestError } from '../../../generated/prisma/runtime/library';
 
 const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
   let statusCode = error.statusCode || 500;
@@ -17,6 +19,9 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
   let simplifiedError;
 
   if (error instanceof ZodError) simplifiedError = handleZodError(error);
+
+  if (error instanceof PrismaClientKnownRequestError)
+    simplifiedError = PrismaError.prismaClientKnownRequestError(error);
 
   if (simplifiedError) {
     statusCode = simplifiedError.statusCode;

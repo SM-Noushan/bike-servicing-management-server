@@ -12,7 +12,6 @@ async function main() {
     console.log(`Server is running on port ${PORT}`);
   });
 }
-
 main();
 
 process.on('unhandledRejection', () => {
