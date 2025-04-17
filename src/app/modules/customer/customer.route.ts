@@ -19,6 +19,7 @@ router
     validateRequestParam(),
     validateRequest(CustomerValidation.updateCustomerValidationSchema),
     CustomerController.updateCustomer,
-  );
+  )
+  .delete('/:id', validateRequestParam(), CustomerController.deleteCustomer);
 
 export const CustomerRoutes = router;

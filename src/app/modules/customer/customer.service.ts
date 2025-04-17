@@ -18,9 +18,7 @@ const getCustomers = async () => {
 };
 
 const getCustomer = async (customerId: string) => {
-  const result = await prisma.customer.findUnique({
-    where: { customerId },
-  });
+  const result = await prisma.customer.findUnique({ where: { customerId } });
 
   return result;
 };
@@ -33,7 +31,12 @@ const updateCustomer = async (
     where: { customerId },
     data: payload,
   });
+
   return result;
+};
+
+const deleteCustomer = async (customerId: string) => {
+  await prisma.customer.delete({ where: { customerId } });
 };
 
 export const CustomerService = {
@@ -41,4 +44,5 @@ export const CustomerService = {
   getCustomers,
   getCustomer,
   updateCustomer,
+  deleteCustomer,
 };
