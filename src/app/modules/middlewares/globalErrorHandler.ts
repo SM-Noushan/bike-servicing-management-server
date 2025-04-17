@@ -4,7 +4,10 @@ import { ErrorRequestHandler } from 'express';
 import { TErrorSource } from '../interface/error';
 import handleZodError from '../errors/handleZodError';
 import { PrismaError } from '../errors/handlePrismaError';
-import { PrismaClientKnownRequestError } from '../../../generated/prisma/runtime/library';
+import {
+  PrismaClientKnownRequestError,
+  PrismaClientValidationError,
+} from '../../../generated/prisma/runtime/library';
 
 const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
   let statusCode = error.statusCode || 500;
@@ -22,6 +25,8 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
 
   if (error instanceof PrismaClientKnownRequestError)
     simplifiedError = PrismaError.prismaClientKnownRequestError(error);
+  if (error instanceof PrismaClientValidationError)
+    simplifiedError = PrismaError.prismaClientValidationError(error);
 
   if (simplifiedError) {
     statusCode = simplifiedError.statusCode;

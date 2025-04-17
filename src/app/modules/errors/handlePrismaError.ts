@@ -1,5 +1,8 @@
+import {
+  PrismaClientKnownRequestError,
+  PrismaClientValidationError,
+} from '../../../generated/prisma/runtime/library';
 import { TErrorSource, TGenericErrorResponse } from '../interface/error';
-import { PrismaClientKnownRequestError } from '../../../generated/prisma/runtime/library';
 
 const prismaClientKnownRequestError = (
   err: PrismaClientKnownRequestError,
@@ -38,4 +41,27 @@ const prismaClientKnownRequestError = (
   };
 };
 
-export const PrismaError = { prismaClientKnownRequestError };
+const prismaClientValidationError = (
+  err: PrismaClientValidationError,
+): TGenericErrorResponse => {
+  const statusCode = 404;
+  const errMsg = err.message.match(/Invalid.*\.$/);
+
+  const errorSources: TErrorSource = [
+    {
+      path: 'err',
+      message: errMsg ? errMsg[0].split('.')[0] : 'PrismaClientValidationError',
+    },
+  ];
+
+  return {
+    statusCode,
+    message: err.name || 'PrismaClientValidationError',
+    errorSources,
+  };
+};
+
+export const PrismaError = {
+  prismaClientValidationError,
+  prismaClientKnownRequestError,
+};
