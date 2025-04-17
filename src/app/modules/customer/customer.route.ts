@@ -5,10 +5,12 @@ import validateRequest from '../middlewares/validateRequest';
 
 const router = express.Router();
 
-router.post(
-  '/',
-  validateRequest(CustomerValidation.createCustomerValidationSchema),
-  CustomerController.createCustomer,
-);
+router
+  .post(
+    '/',
+    validateRequest(CustomerValidation.createCustomerValidationSchema),
+    CustomerController.createCustomer,
+  )
+  .get('/', CustomerController.getCustomers);
 
 export const CustomerRoutes = router;

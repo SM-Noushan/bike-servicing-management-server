@@ -11,4 +11,10 @@ const createCustomer = async (
   return result;
 };
 
-export const CustomerService = { createCustomer };
+const getCustomers = async () => {
+  const result = await prisma.customer.findMany({});
+
+  return result;
+};
+
+export const CustomerService = { createCustomer, getCustomers };
