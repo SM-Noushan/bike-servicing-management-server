@@ -18,6 +18,22 @@ const createService = async (payload: TCreateService) => {
   return result;
 };
 
+const getServices = async () => {
+  const result = await prisma.serviceRecord.findMany();
+
+  return result;
+};
+
+const getService = async (serviceId: string) => {
+  const result = await prisma.serviceRecord.findUnique({
+    where: { serviceId },
+  });
+
+  return result;
+};
+
 export const ServiceService = {
   createService,
+  getServices,
+  getService,
 };
