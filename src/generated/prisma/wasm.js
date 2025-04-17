@@ -130,7 +130,8 @@ exports.Prisma.BikeScalarFieldEnum = {
   bikeId: 'bikeId',
   brand: 'brand',
   model: 'model',
-  year: 'year'
+  year: 'year',
+  customerId: 'customerId'
 };
 
 exports.Prisma.ServiceRecordScalarFieldEnum = {
@@ -138,7 +139,8 @@ exports.Prisma.ServiceRecordScalarFieldEnum = {
   serviceDate: 'serviceDate',
   completionDate: 'completionDate',
   description: 'description',
-  status: 'status'
+  status: 'status',
+  bikeId: 'bikeId'
 };
 
 exports.Prisma.SortOrder = {
