@@ -184,7 +184,7 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://postgres:smnoushan;@localhost:5432/bike-servicing-management-server?schema=public"
+        "value": "postgres://neondb_owner:npg_VEaNOW5ewx7z@ep-frosty-tooth-a1exmhho-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require"
       }
     }
   },
